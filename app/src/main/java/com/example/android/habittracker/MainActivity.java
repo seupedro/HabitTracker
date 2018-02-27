@@ -3,10 +3,11 @@ package com.example.android.habittracker;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private String[] activitys = {"programar", "dançar", "cantar", "malhar", "estudar"};
     /* Cria um Array com 5 ints*/
     private int[] time = {60, 60, 30, 60, 60};
+    /* Cria um TextView Global para mostrar informações sobre a database */
+    private TextView dbInfo;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -40,18 +43,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* Encontra o TextView no XML */
+        dbInfo = findViewById(R.id.db_info);
+
+        /* Inicializa um objeto auxiliador da database */
+        helper = new HabitDbHelper(this);
+    }
+
+    /* Infla o Menu */
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    /* Exibe as opções e chama os respectivos métodos */
+    @Override
+    public boolean onOptionsItemSelected( MenuItem item ) {
+        switch (item.getItemId()){
+            case R.id.empty_db:
+            emptyDb();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /* Deleta e recria a database */
+    private void emptyDb() {
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+        db.execSQL(HabitDbHelper.SQL_DELETE_ENTRIES);
+        db.execSQL(HabitDbHelper.SQL_CREATE_ENTRIES);
+
+        dbInfo.setText("Dados da database: \n\n" );
     }
 
     @Override
     protected void onResume() {
-        /*
-        * Recria uma database limpa toda vez que o app é (re)iniciado
-        * para propósito de demonstração.
-        * */
-        helper = new HabitDbHelper(this);
-        SQLiteDatabase db = helper.getReadableDatabase();
-        db.execSQL(HabitDbHelper.SQL_DELETE_ENTRIES);
-        db.execSQL(HabitDbHelper.SQL_CREATE_ENTRIES);
+        readData();
         super.onResume( );
     }
 
@@ -92,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             /* Encontra uma TextView no Layout para exibir dados da database */
-            TextView dbInfo = findViewById(R.id.db_info);
             dbInfo.setText("Dados da database: \n\n" );
             dbInfo.append(
                             HabitEntry._ID + " || " +
