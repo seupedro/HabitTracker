@@ -3,10 +3,24 @@ HabitTracker
 
 HabitTracker é um simples aplicativo criado para demonstrar o uso de databases SQLite3 no Android.
 
-## Objetivo
-O projeto deste aplicativo foi desenvolvido para o Projeto de uma das Aulas do Nanodegreee Android Basics da Udacity. Sendo assim, como esse objetivo, o aplicativo foi desenvolvido para atingir as cumprir o propósito da Aula. Dessa forma a implementação CRUD (Create, Read, Update, Delete) não está completa.
+## Objetivo 
+Este aplicativo foi desenvolvido para o Projeto de uma das Aulas do Nanodegreee Android Basics da Udacity. Sendo assim, como esse objetivo, este app foi criado para cumprir o propósito da Aula. Dessa forma a implementação CRUD (Create, Read, Update, Delete) está parcialmente implementada com métodos Create and Read.
 
 ### Informações Adicionais
 Se você deseja ver um exemplo na pratica de como implementar uma database no seu aplicativo, veja os comentários dentro das Acitivitys. O código está todo comentado.
 
 Espero que de alguma forma lhe seja útil.
+
+### Licença de Uso
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
