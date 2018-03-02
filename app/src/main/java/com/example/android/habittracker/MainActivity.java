@@ -106,18 +106,7 @@ public class MainActivity extends AppCompatActivity {
     /* Mostra Informações da database no app */
     private void readData(){
 
-        /* Obtém a database */
-        SQLiteDatabase db = helper.getReadableDatabase();
-
-        /* Cria um cursor para recuperar dados da database*/
-        Cursor cursor = db.query(
-                HabitEntry.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
+        Cursor cursor = helper.cursor();
 
         try {
             /* Encontra uma TextView no Layout para exibir dados da database */

@@ -1,6 +1,7 @@
 package com.example.android.habittracker.data;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -42,5 +43,24 @@ public class HabitDbHelper extends SQLiteOpenHelper {
     public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion ) {
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
+    }
+
+    public Cursor cursor(){
+
+        /* Obtém a database */
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+        /* Cria um cursor para recuperar dados da database*/
+        Cursor cursor = db.query(
+                HabitEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        return cursor;
     }
 }
